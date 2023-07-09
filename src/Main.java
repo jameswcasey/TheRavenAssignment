@@ -24,6 +24,13 @@ public class Main extends Application {
         launch();
     }
 
+    /**
+     * @param stage
+     * @throws Exception
+     * <p>
+     *     Displays the user interface which allows a user to press a button to start the program.
+     * </p>
+     */
     @Override
     public void start(Stage stage) throws Exception {
         StackPane layout = new StackPane();

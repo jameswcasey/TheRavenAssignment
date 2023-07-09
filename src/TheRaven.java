@@ -11,6 +11,13 @@ import java.util.*;
 public class TheRaven {
    HashMap<String, Integer> result = new HashMap<String, Integer>();
 
+    /**
+     * <p>
+     * Method responsible for sorting the HashMap by turning it into a list and back.
+     * </p>
+     * @param hm
+     * @return
+     */
     public HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
     {
         List<Map.Entry<String, Integer> > list =
@@ -31,6 +38,16 @@ public class TheRaven {
         return temp;
     }
 
+    /**
+     *<p>
+     *   Creates a Scanner to real the URL.
+     *      * Creates a string buffer to append the scanned items together.
+     *      * Formats the String based off program requirements.
+     *      * Organizes the items within the HashMap by sorting them ast a list.
+     *      * Prints the result.
+     *</p>
+     * @throws Exception
+     */
     public void print() throws Exception {
         URL url = new URL("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
         try {
