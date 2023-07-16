@@ -19,5 +19,6 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="lib" level="project" />
     <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="mysql.connector.java" level="project" />
   </component>
 </module>

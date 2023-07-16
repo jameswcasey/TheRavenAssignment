@@ -3,10 +3,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.jsoup.Jsoup;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.sql.DriverManager;
+import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class TheRaven {
    HashMap<String, Integer> result = new HashMap<String, Integer>();
@@ -50,6 +53,20 @@ public class TheRaven {
      */
     public void print() throws Exception {
         URL url = new URL("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
+        Connection conn = null;
+        Statement stmt = null;
+            try {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/word_occurences?useSSL=false", "root", "jake9224");
+                System.out.println("Connection is created successfully:");
+                stmt = conn.createStatement();
+                System.out.println("Statement is created successfully:");
+
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Something went wrong");
+            } finally {
+
+            }
         try {
             Scanner scanner = new Scanner(url.openStream());
             StringBuffer buffer = new StringBuffer();
@@ -68,6 +85,11 @@ public class TheRaven {
                     dict.put(word, dict.get(word) + 1);
                 } else {
                     dict.put(word, 1);
+                    if (stmt != null) {
+                        String query1 = "INSERT INTO words " + "VALUES ('" + word + "')";
+                        stmt.executeUpdate(query1);
+                        System.out.println("inserted");
+                    }
                 }
             }
             HashMap<String, Integer> sortedDict = sortByValue(dict);
@@ -77,6 +99,7 @@ public class TheRaven {
             }
             System.out.println("Results: " + sortedDict);
             this.result = sortedDict;
+            conn.close();
         } catch(Exception e) {
 
         }
